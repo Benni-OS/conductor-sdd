@@ -1,0 +1,34 @@
+# Conductor SDD — Architectural Specification Contract
+version: "1.0"
+project: "conductor-sdd"
+intent: "Maintain zero-dependency deterministic AST anti-drift engine."
+
+scope:
+  allowed_paths:
+    - "conductor_sdd"
+    - "tests"
+  ignored_paths:
+    - ".git"
+    - ".conductor"
+    - ".venv"
+    - "venv"
+    - "__pycache__"
+    - "node_modules"
+    - "dist"
+    - "build"
+    - ".pytest_cache"
+    - ".ruff_cache"
+  protected_files: []
+
+invariants:
+  protected_symbols: []
+  forbidden_imports:
+    - "pickle"
+    - "marshal"
+  max_cyclomatic_complexity: 15
+  forbid_deleted_assertions: true
+  require_docstrings_on_public: false
+  max_file_lines: 600
+
+acceptance_commands:
+  - "pytest -q"

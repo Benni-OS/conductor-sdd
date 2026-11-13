@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "conductor-sdd": {
+      "command": "conductor-mcp",
+      "args": []
+    }
+  }
+}

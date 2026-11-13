@@ -1,0 +1,1330 @@
+{
+  "version": "1.0",
+  "project": "conductor-sdd",
+  "spec_sha256": "b3132b09fefa0f2ab58474721672eac046a233500e19e76f9ad620a98efece52",
+  "created_at": 1794537966.724754,
+  "root_sha256": "0d9dd3a30d2875a20b69cd4adc49d9dae622812f4b4dceeed5ea15e35af35116",
+  "modules": {
+    "conductor_sdd/__init__.py": {
+      "rel_path": "conductor_sdd/__init__.py",
+      "file_sha256": "f358cd3d6ee3c0a62363f5c1a2e8914ba9c22ca5f51617d72ef1f290c9891eb7",
+      "line_count": 53,
+      "imports": [
+        "conductor_sdd",
+        "conductor_sdd.ast_analyzer",
+        "conductor_sdd.checkpoint",
+        "conductor_sdd.drift_engine",
+        "conductor_sdd.spec"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {}
+    },
+    "conductor_sdd/ast_analyzer.py": {
+      "rel_path": "conductor_sdd/ast_analyzer.py",
+      "file_sha256": "2f45f47b40e0b4cd895278df6a5549d142dff8d6ea793496cc9b381af1dfb170",
+      "line_count": 267,
+      "imports": [
+        "__future__",
+        "ast",
+        "collections",
+        "collections.abc",
+        "dataclasses",
+        "hashlib",
+        "pathlib",
+        "typing"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {
+        "SymbolInfo": {
+          "qualname": "SymbolInfo",
+          "kind": "class",
+          "signature": "class SymbolInfo",
+          "lineno": 14,
+          "end_lineno": 27,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "fd3b7a182f32d96ca5085be2f8c3a3246488093b17ae016b462b5799b56b420b"
+        },
+        "SymbolInfo.to_dict": {
+          "qualname": "SymbolInfo.to_dict",
+          "kind": "method",
+          "signature": "(self) -> dict[str, Any]",
+          "lineno": 26,
+          "end_lineno": 27,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "10e6fe1a43e30aaa34fd525641239dd5c0d50d9da154f7caadc6317178de21c9"
+        },
+        "ModuleSnapshot": {
+          "qualname": "ModuleSnapshot",
+          "kind": "class",
+          "signature": "class ModuleSnapshot",
+          "lineno": 31,
+          "end_lineno": 60,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "99338572e7da6b4d1becad116223c5449d2c9a1b97bee1c8ec8821dedf51369e"
+        },
+        "ModuleSnapshot.to_dict": {
+          "qualname": "ModuleSnapshot.to_dict",
+          "kind": "method",
+          "signature": "(self) -> dict[str, Any]",
+          "lineno": 42,
+          "end_lineno": 45,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "e1b9b3f7943f7f93dcd10f337f2793c4959aed4693ded9155bdfdb6167b2ebcc"
+        },
+        "ModuleSnapshot.from_dict": {
+          "qualname": "ModuleSnapshot.from_dict",
+          "kind": "method",
+          "signature": "(cls, raw: dict[str, Any]) -> ModuleSnapshot",
+          "lineno": 48,
+          "end_lineno": 60,
+          "complexity": 4,
+          "has_docstring": false,
+          "body_sha256": "9e1b4c976f6b32b85fa6734f92d16aca9c2e109a290068244d6f35c690e0118c"
+        },
+        "_sha256_bytes": {
+          "qualname": "_sha256_bytes",
+          "kind": "function",
+          "signature": "(data: bytes) -> str",
+          "lineno": 63,
+          "end_lineno": 64,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "91e2abcbbc582668900d8eeaaded75662aec5a71d33ffa4a6d8a6f34defb4d60"
+        },
+        "_normalized_rel_path": {
+          "qualname": "_normalized_rel_path",
+          "kind": "function",
+          "signature": "(root: Path, file_path: Path) -> str",
+          "lineno": 67,
+          "end_lineno": 68,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "09ea207360cdf4d4229b1811a350db681593ac2a2c5b3a7861df3bed9d19c9d1"
+        },
+        "_compute_complexity": {
+          "qualname": "_compute_complexity",
+          "kind": "function",
+          "signature": "(node: ast.AST) -> int",
+          "lineno": 71,
+          "end_lineno": 90,
+          "complexity": 4,
+          "has_docstring": true,
+          "body_sha256": "27f5499bcfb8142c1a00d6e19b35141500ffd75d69a6dd0dcd63d9c81e7cd8e0"
+        },
+        "_format_arg": {
+          "qualname": "_format_arg",
+          "kind": "function",
+          "signature": "(arg: ast.arg) -> str",
+          "lineno": 93,
+          "end_lineno": 96,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "1eca0afd2748465e6e744b71fd7edcf50d1fddcc6dcf8d0a2910b6b21969bd4e"
+        },
+        "_format_signature": {
+          "qualname": "_format_signature",
+          "kind": "function",
+          "signature": "(node: ast.FunctionDef | ast.AsyncFunctionDef) -> str",
+          "lineno": 99,
+          "end_lineno": 124,
+          "complexity": 9,
+          "has_docstring": true,
+          "body_sha256": "eee010e35034a95401261c033ed80999ab6f5a2b712bbff966ee9a4462ce0a8a"
+        },
+        "_ast_body_hash": {
+          "qualname": "_ast_body_hash",
+          "kind": "function",
+          "signature": "(node: ast.AST) -> str",
+          "lineno": 127,
+          "end_lineno": 130,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "ae106b43bf2f2890a74929c04894bf5803e492bb150744aaabf68e7c420210ca"
+        },
+        "_extract_imports": {
+          "qualname": "_extract_imports",
+          "kind": "function",
+          "signature": "(tree: ast.Module) -> list[str]",
+          "lineno": 133,
+          "end_lineno": 143,
+          "complexity": 6,
+          "has_docstring": false,
+          "body_sha256": "b65b9e81c56144920a5b6337159cba6aa55359200407a077a8882c2eff6e5b50"
+        },
+        "_count_assertions": {
+          "qualname": "_count_assertions",
+          "kind": "function",
+          "signature": "(tree: ast.Module) -> int",
+          "lineno": 146,
+          "end_lineno": 156,
+          "complexity": 7,
+          "has_docstring": true,
+          "body_sha256": "d6850b4bd4f439ef519b61669bc31d08775d651aba0cb0eace67947d576b65b5"
+        },
+        "_collect_symbols": {
+          "qualname": "_collect_symbols",
+          "kind": "function",
+          "signature": "(tree: ast.Module) -> dict[str, SymbolInfo]",
+          "lineno": 159,
+          "end_lineno": 200,
+          "complexity": 9,
+          "has_docstring": true,
+          "body_sha256": "1e8b837d64a925ec38502fe71cd4a494c53809c4f44ce6c07bf47e0f3468428c"
+        },
+        "analyze_file": {
+          "qualname": "analyze_file",
+          "kind": "function",
+          "signature": "(file_path: str | Path, root: str | Path | None) -> ModuleSnapshot",
+          "lineno": 203,
+          "end_lineno": 239,
+          "complexity": 4,
+          "has_docstring": true,
+          "body_sha256": "67359459be2b2ea206a650c40770e64b0aa1114a8ab13fd20757688aa2c76170"
+        },
+        "_should_ignore": {
+          "qualname": "_should_ignore",
+          "kind": "function",
+          "signature": "(rel_parts: tuple[str, ...], ignored_paths: Iterable[str]) -> bool",
+          "lineno": 242,
+          "end_lineno": 244,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "d873ae0cc7335235a3035b587d6311afdf490baf6e71344aa69e6c1710c5c246"
+        },
+        "analyze_directory": {
+          "qualname": "analyze_directory",
+          "kind": "function",
+          "signature": "(root: str | Path, ignored_paths: Iterable[str], extensions: tuple[str, ...], extra_files: Iterable[str]) -> dict[str, ModuleSnapshot]",
+          "lineno": 247,
+          "end_lineno": 267,
+          "complexity": 6,
+          "has_docstring": true,
+          "body_sha256": "7b980bfcb6b302350be13c1470f4af2ab1ec3fb1251234ecef0913b45327c54b"
+        }
+      }
+    },
+    "conductor_sdd/benchmarks.py": {
+      "rel_path": "conductor_sdd/benchmarks.py",
+      "file_sha256": "8648620b856a2107c0bea30054d754641af9a64ddcd25b0a66c578429eaef800",
+      "line_count": 179,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.drift_engine",
+        "conductor_sdd.spec",
+        "dataclasses",
+        "pathlib",
+        "tempfile",
+        "time",
+        "typing"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {
+        "BenchmarkScenario": {
+          "qualname": "BenchmarkScenario",
+          "kind": "class",
+          "signature": "class BenchmarkScenario",
+          "lineno": 16,
+          "end_lineno": 27,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "6667adfc19a0e1de1fa463f6323991f0555658b505336b552ac67718e4bfb55c"
+        },
+        "BenchmarkScenario.to_dict": {
+          "qualname": "BenchmarkScenario.to_dict",
+          "kind": "method",
+          "signature": "(self) -> dict[str, Any]",
+          "lineno": 26,
+          "end_lineno": 27,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "10e6fe1a43e30aaa34fd525641239dd5c0d50d9da154f7caadc6317178de21c9"
+        },
+        "_seed_sample_repo": {
+          "qualname": "_seed_sample_repo",
+          "kind": "function",
+          "signature": "(root: Path) -> None",
+          "lineno": 30,
+          "end_lineno": 55,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "1f36de1b572a8ac20bcac03264aab468e7835709a9976b9343267ce7174d342f"
+        },
+        "run_benchmark": {
+          "qualname": "run_benchmark",
+          "kind": "function",
+          "signature": "(iterations: int) -> dict[str, Any]",
+          "lineno": 58,
+          "end_lineno": 163,
+          "complexity": 9,
+          "has_docstring": true,
+          "body_sha256": "d98afbd2a91e9eccfbd9457d799be49f1cd2626967a7981a5c8dbde70805de70"
+        },
+        "render_benchmark_report": {
+          "qualname": "render_benchmark_report",
+          "kind": "function",
+          "signature": "(result: dict[str, Any]) -> str",
+          "lineno": 166,
+          "end_lineno": 179,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "4073fc13f86f37018253a57fa7f961952ffe546203bd67102b97e761290957d9"
+        }
+      }
+    },
+    "conductor_sdd/checkpoint.py": {
+      "rel_path": "conductor_sdd/checkpoint.py",
+      "file_sha256": "521bf28060238c7b849d26d7839784fd30cf1db8e6ced42c596314b5d8125db5",
+      "line_count": 160,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.spec",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "pathlib",
+        "shutil",
+        "time",
+        "typing"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {
+        "CheckpointInfo": {
+          "qualname": "CheckpointInfo",
+          "kind": "class",
+          "signature": "class CheckpointInfo",
+          "lineno": 19,
+          "end_lineno": 29,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "1c8144abded0dd2f3b7949fcd6a9b998aac66d5972e3be529ea4b4645d2e8ef9"
+        },
+        "CheckpointInfo.to_dict": {
+          "qualname": "CheckpointInfo.to_dict",
+          "kind": "method",
+          "signature": "(self) -> dict[str, Any]",
+          "lineno": 28,
+          "end_lineno": 29,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "10e6fe1a43e30aaa34fd525641239dd5c0d50d9da154f7caadc6317178de21c9"
+        },
+        "_sha256_file": {
+          "qualname": "_sha256_file",
+          "kind": "function",
+          "signature": "(path: Path) -> str",
+          "lineno": 32,
+          "end_lineno": 33,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "d01c8e622fa3be5311c8b5025fc6c82733014f9d6ab1f5ddd0df54d63ae6c28b"
+        },
+        "_should_ignore": {
+          "qualname": "_should_ignore",
+          "kind": "function",
+          "signature": "(rel_parts: tuple[str, ...], ignored: set[str]) -> bool",
+          "lineno": 36,
+          "end_lineno": 37,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "d01ca7505c0bf1432c4f3b37464d7ce17fc28cf5e140d920cf126326e3a3464d"
+        },
+        "create_checkpoint": {
+          "qualname": "create_checkpoint",
+          "kind": "function",
+          "signature": "(root: str | Path, spec: ConductorSpec, label: str) -> CheckpointInfo",
+          "lineno": 40,
+          "end_lineno": 90,
+          "complexity": 8,
+          "has_docstring": true,
+          "body_sha256": "3132f3474d2a9914960dd29aca64e045c4e3e57289f496be94400d2be91d396f"
+        },
+        "list_checkpoints": {
+          "qualname": "list_checkpoints",
+          "kind": "function",
+          "signature": "(root: str | Path) -> list[CheckpointInfo]",
+          "lineno": 93,
+          "end_lineno": 107,
+          "complexity": 5,
+          "has_docstring": true,
+          "body_sha256": "b8b428122cbac30afbb46547b548f6091179142be5534ca3558e20dbff80c01d"
+        },
+        "rollback_checkpoint": {
+          "qualname": "rollback_checkpoint",
+          "kind": "function",
+          "signature": "(root: str | Path, checkpoint_id: str | None, dry_run: bool) -> dict[str, Any]",
+          "lineno": 110,
+          "end_lineno": 160,
+          "complexity": 13,
+          "has_docstring": true,
+          "body_sha256": "ca3364b2e90a3b83ade0773065920c7d00248f624960dc3759d4a9b339c84b7a"
+        }
+      }
+    },
+    "conductor_sdd/cli.py": {
+      "rel_path": "conductor_sdd/cli.py",
+      "file_sha256": "648419700f112628e55d030f616938552d72656159e936513221011bdbd6c985",
+      "line_count": 230,
+      "imports": [
+        "__future__",
+        "argparse",
+        "conductor_sdd",
+        "conductor_sdd.benchmarks",
+        "conductor_sdd.checkpoint",
+        "conductor_sdd.doctor",
+        "conductor_sdd.drift_engine",
+        "conductor_sdd.mcp_server",
+        "conductor_sdd.spec",
+        "json",
+        "pathlib",
+        "sys"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {
+        "_spec_path": {
+          "qualname": "_spec_path",
+          "kind": "function",
+          "signature": "(root: Path, override: str | None) -> Path",
+          "lineno": 29,
+          "end_lineno": 33,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "b53901bc35f48f80866ae8c4ce339145be039efe46e18a0af63a992dceb3c6da"
+        },
+        "_cmd_init": {
+          "qualname": "_cmd_init",
+          "kind": "function",
+          "signature": "(args: argparse.Namespace) -> int",
+          "lineno": 36,
+          "end_lineno": 54,
+          "complexity": 7,
+          "has_docstring": false,
+          "body_sha256": "4c0eeb84b8c885adcd021b4e5b16ba6ac5a2a251dce8714e5c604fa6ddf37d19"
+        },
+        "_cmd_lock": {
+          "qualname": "_cmd_lock",
+          "kind": "function",
+          "signature": "(args: argparse.Namespace) -> int",
+          "lineno": 57,
+          "end_lineno": 72,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "7ec726767ab07c3cd675b8d857e6420695c6366347ebe12bb23f9103ce568bfb"
+        },
+        "_cmd_verify": {
+          "qualname": "_cmd_verify",
+          "kind": "function",
+          "signature": "(args: argparse.Namespace) -> int",
+          "lineno": 75,
+          "end_lineno": 85,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "32247e4c465445f779187cadd803aef3461310ae4c8e287ba41dfacfac52b55e"
+        },
+        "_cmd_checkpoint": {
+          "qualname": "_cmd_checkpoint",
+          "kind": "function",
+          "signature": "(args: argparse.Namespace) -> int",
+          "lineno": 88,
+          "end_lineno": 107,
+          "complexity": 7,
+          "has_docstring": false,
+          "body_sha256": "7375ad711df09ded06d4db013f54ec53f1488e686aa5ca0ee0cf3410421caa6b"
+        },
+        "_cmd_rollback": {
+          "qualname": "_cmd_rollback",
+          "kind": "function",
+          "signature": "(args: argparse.Namespace) -> int",
+          "lineno": 110,
+          "end_lineno": 124,
+          "complexity": 4,
+          "has_docstring": false,
+          "body_sha256": "1f9145a305a591c0d3819b41d4cef160971c673ea553436b362ea6118c33b47b"
+        },
+        "_cmd_bench": {
+          "qualname": "_cmd_bench",
+          "kind": "function",
+          "signature": "(args: argparse.Namespace) -> int",
+          "lineno": 127,
+          "end_lineno": 133,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "650781af9d7d3ee52ed81d6cf5c74f40a5c1aaf039e0965b85d7f5f76dab711d"
+        },
+        "_cmd_doctor": {
+          "qualname": "_cmd_doctor",
+          "kind": "function",
+          "signature": "(args: argparse.Namespace) -> int",
+          "lineno": 136,
+          "end_lineno": 142,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "62302987eb182150efa3af87cd3b9bc7b19ff62be424be1a6debab2f49e71154"
+        },
+        "_cmd_install_hook": {
+          "qualname": "_cmd_install_hook",
+          "kind": "function",
+          "signature": "(args: argparse.Namespace) -> int",
+          "lineno": 145,
+          "end_lineno": 148,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "28cc459fd1bc70c34182967306e1d8679a99e7802042a4d1c97cf5601ab50177"
+        },
+        "_cmd_mcp": {
+          "qualname": "_cmd_mcp",
+          "kind": "function",
+          "signature": "(_: argparse.Namespace) -> int",
+          "lineno": 151,
+          "end_lineno": 153,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "e7e3d338595fac700558774942191416eacf6df948b76cf99df8c1350f6c71b6"
+        },
+        "build_parser": {
+          "qualname": "build_parser",
+          "kind": "function",
+          "signature": "() -> argparse.ArgumentParser",
+          "lineno": 156,
+          "end_lineno": 220,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "dbc188c176e190568c6efe8c9d100eb9093c74266d44cc1b34c3cd28790addd9"
+        },
+        "main": {
+          "qualname": "main",
+          "kind": "function",
+          "signature": "(argv: list[str] | None) -> int",
+          "lineno": 223,
+          "end_lineno": 226,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "4e6a14430788e34c4a69eaf8c094d9c4916bf92fadbc803293c9dc04e97a8b71"
+        }
+      }
+    },
+    "conductor_sdd/doctor.py": {
+      "rel_path": "conductor_sdd/doctor.py",
+      "file_sha256": "423c640b80c4c009156b8cd11048d32cc7f365dc5c9734596f059a00d24f734e",
+      "line_count": 111,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.drift_engine",
+        "conductor_sdd.spec",
+        "pathlib",
+        "platform",
+        "sys",
+        "typing"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {
+        "run_doctor": {
+          "qualname": "run_doctor",
+          "kind": "function",
+          "signature": "(root: str | Path) -> dict[str, Any]",
+          "lineno": 16,
+          "end_lineno": 50,
+          "complexity": 7,
+          "has_docstring": true,
+          "body_sha256": "0346adb0dd85d05e146881f06f0367b414fed06e94501aaf2eb64b912a66cc55"
+        },
+        "render_doctor_report": {
+          "qualname": "render_doctor_report",
+          "kind": "function",
+          "signature": "(info: dict[str, Any]) -> str",
+          "lineno": 53,
+          "end_lineno": 72,
+          "complexity": 4,
+          "has_docstring": true,
+          "body_sha256": "85e1bff032e3506feedd040310993e3f1de371c046e7ca616a418e3feb76c15e"
+        },
+        "install_pre_commit_hook": {
+          "qualname": "install_pre_commit_hook",
+          "kind": "function",
+          "signature": "(root: str | Path) -> Path",
+          "lineno": 75,
+          "end_lineno": 95,
+          "complexity": 3,
+          "has_docstring": true,
+          "body_sha256": "0bb890e04e28777814cd953c8b2da66f562e9535a7810cd0c4e00d3afb84eab6"
+        },
+        "write_agent_rules_file": {
+          "qualname": "write_agent_rules_file",
+          "kind": "function",
+          "signature": "(root: str | Path, project_name: str) -> Path",
+          "lineno": 98,
+          "end_lineno": 111,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "4a8b7e9709a0c66150ee08091f826b057e2ad1d9add37b8304bbfdffe33f7771"
+        }
+      }
+    },
+    "conductor_sdd/drift_engine.py": {
+      "rel_path": "conductor_sdd/drift_engine.py",
+      "file_sha256": "02267f32067e0d4444530eb25f7b109b61ebc6eb36e72d681a4c092ad4b87e1e",
+      "line_count": 424,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.ast_analyzer",
+        "conductor_sdd.spec",
+        "dataclasses",
+        "hashlib",
+        "json",
+        "pathlib",
+        "time",
+        "typing"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {
+        "DriftViolation": {
+          "qualname": "DriftViolation",
+          "kind": "class",
+          "signature": "class DriftViolation",
+          "lineno": 19,
+          "end_lineno": 30,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "5038f001a1ef9d90656b3f3826f656f7f79ed2a2585b3ee87bc3f22d0adb23ba"
+        },
+        "DriftViolation.to_dict": {
+          "qualname": "DriftViolation.to_dict",
+          "kind": "method",
+          "signature": "(self) -> dict[str, Any]",
+          "lineno": 29,
+          "end_lineno": 30,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "10e6fe1a43e30aaa34fd525641239dd5c0d50d9da154f7caadc6317178de21c9"
+        },
+        "LockManifest": {
+          "qualname": "LockManifest",
+          "kind": "class",
+          "signature": "class LockManifest",
+          "lineno": 34,
+          "end_lineno": 67,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "f2a21573eaa7f3948a0709c4aa5dfae953ef116389ecb6ddce2f7c016f36882d"
+        },
+        "LockManifest.to_dict": {
+          "qualname": "LockManifest.to_dict",
+          "kind": "method",
+          "signature": "(self) -> dict[str, Any]",
+          "lineno": 44,
+          "end_lineno": 52,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "d030614418b50e5f44892d7011fba44e7d7de03af3bc1673e116d1ea4a0d34b3"
+        },
+        "LockManifest.from_dict": {
+          "qualname": "LockManifest.from_dict",
+          "kind": "method",
+          "signature": "(cls, raw: dict[str, Any]) -> LockManifest",
+          "lineno": 55,
+          "end_lineno": 67,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "ceb709a8ba918149ad0634fa493eeb9591395e0305f7012782ccd1bd11569112"
+        },
+        "DriftReport": {
+          "qualname": "DriftReport",
+          "kind": "class",
+          "signature": "class DriftReport",
+          "lineno": 71,
+          "end_lineno": 111,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "32ca49970c5515412bfde530ee532a42e333850c634a64f0f99c98bc5d873342"
+        },
+        "DriftReport.to_dict": {
+          "qualname": "DriftReport.to_dict",
+          "kind": "method",
+          "signature": "(self) -> dict[str, Any]",
+          "lineno": 81,
+          "end_lineno": 94,
+          "complexity": 5,
+          "has_docstring": false,
+          "body_sha256": "25cdb30bfe53ef29bbca81dea0f45027fb0aa4b393a2b03f22bd725ba14f76ed"
+        },
+        "DriftReport.summary_text": {
+          "qualname": "DriftReport.summary_text",
+          "kind": "method",
+          "signature": "(self) -> str",
+          "lineno": 96,
+          "end_lineno": 111,
+          "complexity": 5,
+          "has_docstring": false,
+          "body_sha256": "812150abcf6478b3b35590fab8726d90ffc41f538d164b08b0bf5733949c9862"
+        },
+        "_compute_spec_hash": {
+          "qualname": "_compute_spec_hash",
+          "kind": "function",
+          "signature": "(spec: ConductorSpec) -> str",
+          "lineno": 114,
+          "end_lineno": 116,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "d73515dbcb7b7b95ec7fff9ea2bba00fd2c6a774db3e9eaecd8b1b98a0dc6d7c"
+        },
+        "_compute_root_hash": {
+          "qualname": "_compute_root_hash",
+          "kind": "function",
+          "signature": "(modules: dict[str, ModuleSnapshot]) -> str",
+          "lineno": 119,
+          "end_lineno": 124,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "925e43bc4a0ed954cceef0b334224204ab7e72ba6ef6b3ef43041711e45864e1"
+        },
+        "_is_path_allowed": {
+          "qualname": "_is_path_allowed",
+          "kind": "function",
+          "signature": "(rel_path: str, allowed_paths: list[str]) -> bool",
+          "lineno": 127,
+          "end_lineno": 135,
+          "complexity": 7,
+          "has_docstring": false,
+          "body_sha256": "50d2d717104264111d9e45ec5619d202125a5e426f14466e717298fa6d6e6792"
+        },
+        "_flatten_symbols": {
+          "qualname": "_flatten_symbols",
+          "kind": "function",
+          "signature": "(modules: dict[str, ModuleSnapshot]) -> dict[str, tuple[str, SymbolInfo]]",
+          "lineno": 138,
+          "end_lineno": 144,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "664185fb4ddeadd89d59d3627533bb2057048c98d93aff540ef86452c1fa4fd0"
+        },
+        "build_lock_manifest": {
+          "qualname": "build_lock_manifest",
+          "kind": "function",
+          "signature": "(root: str | Path, spec: ConductorSpec) -> LockManifest",
+          "lineno": 147,
+          "end_lineno": 161,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "73ee767332e539631822936edb11a6a54ff786576b89098938e22da8d6835a77"
+        },
+        "save_lock_manifest": {
+          "qualname": "save_lock_manifest",
+          "kind": "function",
+          "signature": "(root: str | Path, manifest: LockManifest) -> Path",
+          "lineno": 164,
+          "end_lineno": 169,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "78f0ceb17aed5142b8d5413cc8a722edada32f14e951c761f44952442e370dcf"
+        },
+        "load_lock_manifest": {
+          "qualname": "load_lock_manifest",
+          "kind": "function",
+          "signature": "(root: str | Path) -> LockManifest | None",
+          "lineno": 172,
+          "end_lineno": 178,
+          "complexity": 2,
+          "has_docstring": true,
+          "body_sha256": "c0d5c40e79c1150a27c7a2b15ada34a1df7e31ed8f3c9958555dada8bc37c929"
+        },
+        "_check_static_invariants": {
+          "qualname": "_check_static_invariants",
+          "kind": "function",
+          "signature": "(rel_path: str, snap: ModuleSnapshot, spec: ConductorSpec, strict: bool) -> list[DriftViolation]",
+          "lineno": 181,
+          "end_lineno": 256,
+          "complexity": 15,
+          "has_docstring": false,
+          "body_sha256": "58959829dffdae1f04c73476be0467b9a61d3117e25fb2a0a6f1e2ce7e822d57"
+        },
+        "_check_protected_files": {
+          "qualname": "_check_protected_files",
+          "kind": "function",
+          "signature": "(current: dict[str, ModuleSnapshot], baseline: LockManifest, protected_files: set[str]) -> list[DriftViolation]",
+          "lineno": 259,
+          "end_lineno": 279,
+          "complexity": 5,
+          "has_docstring": false,
+          "body_sha256": "59a55bd0b75f882461b93281d80f04b500fbe5325b2769ae9c8869f628cecd1f"
+        },
+        "_check_protected_symbols": {
+          "qualname": "_check_protected_symbols",
+          "kind": "function",
+          "signature": "(current: dict[str, ModuleSnapshot], baseline: LockManifest, protected_symbols: list[str]) -> list[DriftViolation]",
+          "lineno": 282,
+          "end_lineno": 319,
+          "complexity": 7,
+          "has_docstring": false,
+          "body_sha256": "38400fe2347e3a7a70ddbf0adea819853864f904fb24ad0ef9dbc79f5b41ab94"
+        },
+        "_check_scope_and_assertions": {
+          "qualname": "_check_scope_and_assertions",
+          "kind": "function",
+          "signature": "(current: dict[str, ModuleSnapshot], baseline: LockManifest, spec: ConductorSpec) -> list[DriftViolation]",
+          "lineno": 322,
+          "end_lineno": 373,
+          "complexity": 11,
+          "has_docstring": false,
+          "body_sha256": "61d82c1b6ceff91cc859c1c6946dba79a1d0b2400a3e0f801e6a9708c5477f9c"
+        },
+        "_check_baseline_drift": {
+          "qualname": "_check_baseline_drift",
+          "kind": "function",
+          "signature": "(current: dict[str, ModuleSnapshot], baseline: LockManifest, spec: ConductorSpec) -> list[DriftViolation]",
+          "lineno": 376,
+          "end_lineno": 386,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "c1db7d51eebd12d00fa45832025d49548444aeaf694acab9570c55865fb15be8"
+        },
+        "verify_drift": {
+          "qualname": "verify_drift",
+          "kind": "function",
+          "signature": "(root: str | Path, spec: ConductorSpec, baseline: LockManifest | None, strict: bool) -> DriftReport",
+          "lineno": 389,
+          "end_lineno": 424,
+          "complexity": 6,
+          "has_docstring": true,
+          "body_sha256": "548a645fd0e5b6687dcf475a5b0f1ba5fa502f7a9d1e219d07e54723ff0c2c4c"
+        }
+      }
+    },
+    "conductor_sdd/mcp_server.py": {
+      "rel_path": "conductor_sdd/mcp_server.py",
+      "file_sha256": "d196ace40b0475afce1977d3bbc2411a84208617d4ba77ea818a5a05f1450dbb",
+      "line_count": 217,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.checkpoint",
+        "conductor_sdd.drift_engine",
+        "conductor_sdd.spec",
+        "json",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {
+        "_resolve_root_and_spec": {
+          "qualname": "_resolve_root_and_spec",
+          "kind": "function",
+          "signature": "(args: dict[str, Any]) -> tuple[Path, Path]",
+          "lineno": 80,
+          "end_lineno": 86,
+          "complexity": 4,
+          "has_docstring": false,
+          "body_sha256": "6f70a53e636d07c850c6f472bc64d40ef0a43486b570cc5c93605eb234691eb4"
+        },
+        "dispatch_tool_call": {
+          "qualname": "dispatch_tool_call",
+          "kind": "function",
+          "signature": "(name: str, arguments: dict[str, Any] | None) -> dict[str, Any]",
+          "lineno": 89,
+          "end_lineno": 134,
+          "complexity": 8,
+          "has_docstring": true,
+          "body_sha256": "335877e3c8662fa6879b834e53541b9be802fd9dcbb79d642109fcebfe06e4ee"
+        },
+        "handle_jsonrpc_request": {
+          "qualname": "handle_jsonrpc_request",
+          "kind": "function",
+          "signature": "(request: dict[str, Any]) -> dict[str, Any] | None",
+          "lineno": 137,
+          "end_lineno": 188,
+          "complexity": 10,
+          "has_docstring": true,
+          "body_sha256": "bfcd02fc51efcdfba796f354f44bacbb3d73b00fed092d4b7136156d3b6e2d5a"
+        },
+        "serve_stdio": {
+          "qualname": "serve_stdio",
+          "kind": "function",
+          "signature": "(stdin: TextIO | None, stdout: TextIO | None) -> None",
+          "lineno": 191,
+          "end_lineno": 211,
+          "complexity": 8,
+          "has_docstring": true,
+          "body_sha256": "acc07678490d091baba2a882a0cc918b7d118c9d5f58b7235379277eb2500199"
+        },
+        "main": {
+          "qualname": "main",
+          "kind": "function",
+          "signature": "() -> int",
+          "lineno": 214,
+          "end_lineno": 217,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "e1fc0a782d2cdb638c21178f07ddf99f3a1c9b1db31531b30e075cbf2875f8cb"
+        }
+      }
+    },
+    "conductor_sdd/spec.py": {
+      "rel_path": "conductor_sdd/spec.py",
+      "file_sha256": "4f2d9f64b69e04b8c9e23651658a500a76c7e679523df35ded7f05c268620e58",
+      "line_count": 266,
+      "imports": [
+        "__future__",
+        "dataclasses",
+        "json",
+        "pathlib",
+        "re",
+        "typing",
+        "yaml"
+      ],
+      "assertion_count": 0,
+      "syntax_error": null,
+      "symbols": {
+        "SpecScope": {
+          "qualname": "SpecScope",
+          "kind": "class",
+          "signature": "class SpecScope",
+          "lineno": 26,
+          "end_lineno": 31,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "500ec6c8b493a799187aacd200a36a950d5ce810117be8b70c88b6c6c68fa7e9"
+        },
+        "SpecInvariants": {
+          "qualname": "SpecInvariants",
+          "kind": "class",
+          "signature": "class SpecInvariants",
+          "lineno": 35,
+          "end_lineno": 43,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "81e27e9cf511e8e94e65a744e0bc2f0b6c3c20944b192afc4fc86185dedd6799"
+        },
+        "ConductorSpec": {
+          "qualname": "ConductorSpec",
+          "kind": "class",
+          "signature": "class ConductorSpec",
+          "lineno": 47,
+          "end_lineno": 59,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "31324b5fcc46a56ec762133225419d20007e5b8032ed33c0f5d044ecedbdaa68"
+        },
+        "ConductorSpec.to_dict": {
+          "qualname": "ConductorSpec.to_dict",
+          "kind": "method",
+          "signature": "(self) -> dict[str, Any]",
+          "lineno": 57,
+          "end_lineno": 59,
+          "complexity": 1,
+          "has_docstring": true,
+          "body_sha256": "f536a443288e3214b8e6847578acc118fef9535509fbd6315b3159c719bb5629"
+        },
+        "_coerce_scalar": {
+          "qualname": "_coerce_scalar",
+          "kind": "function",
+          "signature": "(raw: str) -> Any",
+          "lineno": 62,
+          "end_lineno": 83,
+          "complexity": 14,
+          "has_docstring": true,
+          "body_sha256": "9fbfc7b590532a76b85cf086c00069903d1e7d99c31f6deefd568566dbc37b7e"
+        },
+        "_strip_inline_comment": {
+          "qualname": "_strip_inline_comment",
+          "kind": "function",
+          "signature": "(line: str) -> str",
+          "lineno": 86,
+          "end_lineno": 98,
+          "complexity": 11,
+          "has_docstring": true,
+          "body_sha256": "c0dfbce02cb8e2aeb352067d6c1e1941d642f710f250d58c3b8eb57f82cc2ba5"
+        },
+        "_tokenize_yaml_lines": {
+          "qualname": "_tokenize_yaml_lines",
+          "kind": "function",
+          "signature": "(text: str) -> list[tuple[int, str]]",
+          "lineno": 101,
+          "end_lineno": 109,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "7d284baae99d506d323d210cebef5471be14700d2c16c1df942fa95a44498404"
+        },
+        "_parse_yaml_list": {
+          "qualname": "_parse_yaml_list",
+          "kind": "function",
+          "signature": "(lines: list[tuple[int, str]], index: int, expected_indent: int) -> tuple[list[Any], int]",
+          "lineno": 112,
+          "end_lineno": 120,
+          "complexity": 4,
+          "has_docstring": false,
+          "body_sha256": "3b68d5b6d7640a87c33f59c1446d6372f53ebbf489be55496ed142fb50e60d06"
+        },
+        "_parse_yaml_mapping": {
+          "qualname": "_parse_yaml_mapping",
+          "kind": "function",
+          "signature": "(lines: list[tuple[int, str]], index: int, expected_indent: int) -> tuple[dict[str, Any], int]",
+          "lineno": 123,
+          "end_lineno": 146,
+          "complexity": 8,
+          "has_docstring": false,
+          "body_sha256": "4508586fe9ba00fdb2dec1ed18ec317250a465bcab48f60e282753317944f8ef"
+        },
+        "_parse_yaml_block": {
+          "qualname": "_parse_yaml_block",
+          "kind": "function",
+          "signature": "(lines: list[tuple[int, str]], index: int, expected_indent: int) -> tuple[Any, int]",
+          "lineno": 149,
+          "end_lineno": 154,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "f4df6f6b936456fbffd71426f272cf2731b4ee7b71283a916e77241678b1665c"
+        },
+        "_parse_simple_yaml": {
+          "qualname": "_parse_simple_yaml",
+          "kind": "function",
+          "signature": "(text: str) -> dict[str, Any]",
+          "lineno": 157,
+          "end_lineno": 163,
+          "complexity": 2,
+          "has_docstring": true,
+          "body_sha256": "5734b5e61dcaca18e58bb10c065d3555faaf83c8de6b786817c7fc67ce274c38"
+        },
+        "load_spec": {
+          "qualname": "load_spec",
+          "kind": "function",
+          "signature": "(path: str | Path) -> ConductorSpec",
+          "lineno": 166,
+          "end_lineno": 210,
+          "complexity": 15,
+          "has_docstring": true,
+          "body_sha256": "92af5c231168c90d48981b3eb7788d22d46120ade013ac6d29ff8786ace11727"
+        },
+        "validate_spec_schema": {
+          "qualname": "validate_spec_schema",
+          "kind": "function",
+          "signature": "(spec: ConductorSpec) -> list[str]",
+          "lineno": 213,
+          "end_lineno": 226,
+          "complexity": 6,
+          "has_docstring": true,
+          "body_sha256": "f62bef7aa463d098d55768552db0522b636241a93206dcf6fcff0671c4f37171"
+        },
+        "_yaml_list": {
+          "qualname": "_yaml_list",
+          "kind": "function",
+          "signature": "(items: list[str], indent: int) -> str",
+          "lineno": 229,
+          "end_lineno": 233,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "01a2ffe5456af33c5b29f590422dac8175ff259508905ce80c83253ec0d42503"
+        },
+        "dump_default_spec": {
+          "qualname": "dump_default_spec",
+          "kind": "function",
+          "signature": "(project_name: str, intent: str | None, allowed_paths: list[str] | None) -> str",
+          "lineno": 236,
+          "end_lineno": 266,
+          "complexity": 4,
+          "has_docstring": true,
+          "body_sha256": "b96139bd8002ce2033003230f719200f21848152985d243935ab13a624488bdc"
+        }
+      }
+    },
+    "examples/quickstart_guardrail.py": {
+      "rel_path": "examples/quickstart_guardrail.py",
+      "file_sha256": "8f770038e352d98c7e36cb5bc785e5d764d86330a83ea0fdda3873475d408688",
+      "line_count": 58,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "pathlib",
+        "tempfile"
+      ],
+      "assertion_count": 2,
+      "syntax_error": null,
+      "symbols": {
+        "main": {
+          "qualname": "main",
+          "kind": "function",
+          "signature": "() -> None",
+          "lineno": 19,
+          "end_lineno": 54,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "897c0741c9789b6ea098ea33b1b547e5242e9e2fd8092a908791036a81387be6"
+        }
+      }
+    },
+    "tests/test_ast_analyzer.py": {
+      "rel_path": "tests/test_ast_analyzer.py",
+      "file_sha256": "75bc0abdf4e23416b8a7ea0e747037930043a969e50cf78421db21d7f864b306",
+      "line_count": 55,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.ast_analyzer",
+        "pathlib"
+      ],
+      "assertion_count": 14,
+      "syntax_error": null,
+      "symbols": {
+        "test_analyze_file_extracts_symbols_complexity_and_imports": {
+          "qualname": "test_analyze_file_extracts_symbols_complexity_and_imports",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 8,
+          "end_lineno": 36,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "71219820935f9c4f8d268f1bce1802ef640ed89fd562c7e10a056ff38bf27f1a"
+        },
+        "test_analyze_file_captures_syntax_error": {
+          "qualname": "test_analyze_file_captures_syntax_error",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 39,
+          "end_lineno": 44,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "8a1a02c032d984b4a0f572b4aacac58831f6e2ee9ba64293be8178b61a07c003"
+        },
+        "test_analyze_directory_respects_ignored_paths": {
+          "qualname": "test_analyze_directory_respects_ignored_paths",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 47,
+          "end_lineno": 55,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "5f5dc4a7362899673f07cf9a825924a68ae3864a2898b7c3763aa6be170b4c0f"
+        }
+      }
+    },
+    "tests/test_checkpoint_rollback.py": {
+      "rel_path": "tests/test_checkpoint_rollback.py",
+      "file_sha256": "20af785316387ce479e42c546fee7633e08adc030ed9647c42cf321081c26161",
+      "line_count": 46,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.checkpoint",
+        "conductor_sdd.spec",
+        "pathlib",
+        "pytest"
+      ],
+      "assertion_count": 8,
+      "syntax_error": null,
+      "symbols": {
+        "test_checkpoint_and_atomic_rollback": {
+          "qualname": "test_checkpoint_and_atomic_rollback",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 11,
+          "end_lineno": 34,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "522de08b6486b32e9d4731615e3e36dd05e104c23d1a636d307ffd1ff3da3a79"
+        },
+        "test_rollback_detects_corrupted_checkpoint_hash": {
+          "qualname": "test_rollback_detects_corrupted_checkpoint_hash",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 37,
+          "end_lineno": 46,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "ee45b4054ba2c2cb0a320d63b309470ac3cddbd3801866fe16e2a4e6b05f7641"
+        }
+      }
+    },
+    "tests/test_cli_and_bench.py": {
+      "rel_path": "tests/test_cli_and_bench.py",
+      "file_sha256": "077c9ea4c9b944edbea439c28db67c72a251923af3dfca006764488b030ddef9",
+      "line_count": 46,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.benchmarks",
+        "conductor_sdd.cli",
+        "conductor_sdd.doctor",
+        "json",
+        "pathlib"
+      ],
+      "assertion_count": 15,
+      "syntax_error": null,
+      "symbols": {
+        "test_benchmark_matrix_catches_all_failure_modes": {
+          "qualname": "test_benchmark_matrix_catches_all_failure_modes",
+          "kind": "function",
+          "signature": "() -> None",
+          "lineno": 11,
+          "end_lineno": 15,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "8039030acde1d9ec49935210d38d733a3290a8ad8a2f108e769d939d1541c39b"
+        },
+        "test_cli_full_lifecycle": {
+          "qualname": "test_cli_full_lifecycle",
+          "kind": "function",
+          "signature": "(tmp_path: Path, capsys) -> None",
+          "lineno": 18,
+          "end_lineno": 46,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "ddd9ed8186adbf026f65d7592c6c7e232c7571b8d099f0b0339aaaba2128fc7b"
+        }
+      }
+    },
+    "tests/test_drift_engine.py": {
+      "rel_path": "tests/test_drift_engine.py",
+      "file_sha256": "2baf4d2a330a3af382760674d16d9c12f41fe193256641e0e1ba39ea0c6b6bb1",
+      "line_count": 78,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.drift_engine",
+        "conductor_sdd.spec",
+        "pathlib"
+      ],
+      "assertion_count": 6,
+      "syntax_error": null,
+      "symbols": {
+        "_setup_repo": {
+          "qualname": "_setup_repo",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> tuple[Path, ConductorSpec]",
+          "lineno": 14,
+          "end_lineno": 43,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "470bf80c5c55f805f3e2742f3e16d61999989df2e9b52c5bc0e54a1746d3632d"
+        },
+        "test_clean_workspace_passes_with_zero_drift": {
+          "qualname": "test_clean_workspace_passes_with_zero_drift",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 46,
+          "end_lineno": 56,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "1009b22e44d0cb2f012b57eafaa51c93c9456e62007db9c8a3a2a4bc166a8d0b"
+        },
+        "test_detects_signature_break_forbidden_import_and_deleted_assertions": {
+          "qualname": "test_detects_signature_break_forbidden_import_and_deleted_assertions",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 59,
+          "end_lineno": 78,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "1ec32d12aafb3298316ff6b78fe445db37d957901f005e6b4bc4c898df4b0c93"
+        }
+      }
+    },
+    "tests/test_mcp_server.py": {
+      "rel_path": "tests/test_mcp_server.py",
+      "file_sha256": "a994755fe693df53d2ce449dcddeec96b070fe1526e6294a6e520b07f1d730a1",
+      "line_count": 54,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.mcp_server",
+        "conductor_sdd.spec",
+        "io",
+        "json",
+        "pathlib"
+      ],
+      "assertion_count": 7,
+      "syntax_error": null,
+      "symbols": {
+        "test_mcp_initialize_and_tools_list": {
+          "qualname": "test_mcp_initialize_and_tools_list",
+          "kind": "function",
+          "signature": "() -> None",
+          "lineno": 11,
+          "end_lineno": 25,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "41e130a70d4b5724893ed1f4900af3b4d7f41edf4bd1686045d2e2c18f04d234"
+        },
+        "test_mcp_stdio_end_to_end_guardrail_cycle": {
+          "qualname": "test_mcp_stdio_end_to_end_guardrail_cycle",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 28,
+          "end_lineno": 54,
+          "complexity": 3,
+          "has_docstring": false,
+          "body_sha256": "a20e36a3317687ec85e85b8a148a4a92574e92a7a70b41face0ebbbca95e4175"
+        }
+      }
+    },
+    "tests/test_spec.py": {
+      "rel_path": "tests/test_spec.py",
+      "file_sha256": "c79cda41473579dd2c469a43423a62fb8e2e1a45a65d140af927e65be5cf3cff",
+      "line_count": 71,
+      "imports": [
+        "__future__",
+        "conductor_sdd",
+        "conductor_sdd.spec",
+        "pathlib",
+        "pytest"
+      ],
+      "assertion_count": 14,
+      "syntax_error": null,
+      "symbols": {
+        "test_default_spec_roundtrip": {
+          "qualname": "test_default_spec_roundtrip",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 17,
+          "end_lineno": 30,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "0d8c6961c548d6ba0d253f184b48c069f1a0094e7eaca141574ec7ac4f72d2db"
+        },
+        "test_json_spec_and_inline_list_yaml": {
+          "qualname": "test_json_spec_and_inline_list_yaml",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 33,
+          "end_lineno": 55,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "f0b57e44e6b06977a8fd9222860af0451bada1d7cfc0e3a49368d0fab6e8117c"
+        },
+        "test_validate_spec_schema_catches_invalid": {
+          "qualname": "test_validate_spec_schema_catches_invalid",
+          "kind": "function",
+          "signature": "() -> None",
+          "lineno": 58,
+          "end_lineno": 66,
+          "complexity": 1,
+          "has_docstring": false,
+          "body_sha256": "508b20e536eef43c73e9c56cd734fb9147f4eb0065db3c10417664ef285ad3ac"
+        },
+        "test_missing_spec_raises": {
+          "qualname": "test_missing_spec_raises",
+          "kind": "function",
+          "signature": "(tmp_path: Path) -> None",
+          "lineno": 69,
+          "end_lineno": 71,
+          "complexity": 2,
+          "has_docstring": false,
+          "body_sha256": "26e452fe913be55cf6af2dd707acc7fcf8082b8b923f304502865585f4943153"
+        }
+      }
+    }
+  }
+}
