@@ -19,7 +19,7 @@
 
 <br/>
 
-<img src="assets/demo.svg" alt="Conductor SDD Static AST Drift Engine Demo" width="100%"/>
+<img src="assets/demo.gif" alt="Conductor SDD Static AST Drift Engine Demo" width="100%"/>
 
 </div>
 
