@@ -5,7 +5,7 @@
 <br/>
 
 [![CI](https://github.com/Benni-OS/conductor-sdd/actions/workflows/ci.yml/badge.svg)](https://github.com/Benni-OS/conductor-sdd/actions/workflows/ci.yml)
-[![Tests](https://img.shields.io/badge/Tests-15%20Passed-00C853?style=for-the-badge&logo=pytest&logoColor=white)](#-reproducible-drift-benchmark)
+[![Tests](https://img.shields.io/badge/Tests-18%20Passed-00C853?style=for-the-badge&logo=pytest&logoColor=white)](#-reproducible-drift-benchmark)
 [![Python](https://img.shields.io/badge/Python-3.10+-7000FF?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
 [![Dependencies](https://img.shields.io/badge/Dependencies-Zero%20(Stdlib)-00C853?style=for-the-badge)](#-why-conductor-sdd)
 [![MCP Native](https://img.shields.io/badge/MCP-JSON--RPC%202.0-8a2be2?style=for-the-badge)](#-native-mcp-integration-claude-code--cursor--antigravity)
@@ -73,11 +73,19 @@ We compared `conductor-sdd` against the 5 largest global open-source Spec-Driven
   │  │ • SDD-002 Protect │  │ • SDD-005 Imports │  │ • SDD-008 Lines │  │
   │  │ • SDD-004 Scope   │  │ • SDD-006 Asserts │  │ • SDD-009 Docs  │  │
   │  └───────────────────┘  └───────────────────┘  └─────────────────┘  │
+  │                                                                     │
+  │  ┌───────────────────┐  ┌───────────────────┐  ┌─────────────────┐  │
+  │  │ Atomic Checkpoint │  │  Serve & MCP      │  │ Tools & Matrix  │  │
+  │  │ • SHA-256 Lock    │  │  • JSON-RPC 2.0   │  │ • SDD Doctor    │  │
+  │  │ • Sub-5ms Restore │  │  • Telemetry P99  │  │ • 6-Mode Bench  │  │
+  │  └───────────────────┘  └───────────────────┘  └─────────────────┘  │
   └─────────────────────────────────────────────────────────────────────┘
          │                                         │
          ├── PASS (0.00% Drift) ──► Safe to commit / promote / pass Git hook
          └── DRIFT DETECTED     ──► Exit code 2 + `conductor rollback`
 ```
+
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full layer specification.
 
 ---
 
@@ -205,29 +213,51 @@ Exposed MCP tools:
 
 ---
 
-## 🗂️ Project Structure
+## 📁 Project Structure
 
 ```text
 conductor-sdd/
-├── .github/workflows/ci.yml          # Python 3.10 / 3.11 / 3.12 lint, pytest & bench gate
+├── .github/workflows/ci.yml              # Python 3.10 / 3.11 / 3.12 lint, pytest & bench gate
 ├── assets/
-│   └── demo.svg                      # Branded terminal animation
+│   └── demo.gif                          # Branded terminal animation
 ├── conductor_sdd/
-│   ├── __init__.py                   # Public library exports
-│   ├── ast_analyzer.py               # Zero-dependency AST symbol, complexity & assertion extractor
-│   ├── benchmarks.py                 # 6-scenario reproducible agent-drift benchmark suite
-│   ├── checkpoint.py                 # Atomic SHA-256 snapshot & rollback engine
-│   ├── cli.py                        # CLI commands (init, lock, verify, checkpoint, rollback, bench, doctor, mcp)
-│   ├── doctor.py                     # Repository SDD readiness diagnostics
-│   ├── drift_engine.py               # SDD-001..009 deterministic rule evaluator & drift scorer
-│   ├── mcp_server.py                 # Native JSON-RPC 2.0 MCP stdio server
-│   └── spec.py                       # Zero-dependency YAML subset parser & spec validator
+│   ├── __init__.py                       # Backwards-compatible public library exports
+│   ├── cli.py                            # CLI commands (init, lock, verify, checkpoint, rollback, bench, doctor, mcp)
+│   ├── core/
+│   │   ├── __init__.py                   # Core package exports
+│   │   ├── ast_analyzer.py               # Zero-dependency AST symbol, complexity & assertion extractor
+│   │   ├── checkpoint.py                 # Atomic SHA-256 snapshot & rollback engine
+│   │   ├── drift_engine.py               # SDD-001..009 deterministic rule evaluator & drift scorer
+│   │   └── spec.py                       # Zero-dependency YAML subset parser & spec validator
+│   ├── serve/
+│   │   ├── __init__.py                   # Serve package exports
+│   │   ├── mcp_server.py                 # Native JSON-RPC 2.0 MCP stdio server
+│   │   ├── telemetry.py                  # AST verify P50/P90/P99 latency & SDD rule hit telemetry
+│   │   └── health_monitor.py             # Spec contract, lock manifest & AST self-test monitor
+│   └── tools/
+│       ├── __init__.py                   # Tools package exports
+│       ├── doctor.py                     # Repository SDD readiness diagnostics & Git hook installer
+│       ├── benchmarks.py                 # 6-scenario reproducible agent-drift benchmark suite
+│       └── bench_matrix.py               # Multi-scale AST lock & verification benchmark matrix
+├── docs/
+│   └── ARCHITECTURE.md                   # Layer-by-layer architectural specification
 ├── examples/
-│   ├── mcp_client_config.json        # Ready-to-use MCP client config
-│   └── quickstart_guardrail.py       # Programmatic Python guardrail example
-├── tests/                            # Full pytest suite (15 tests passing)
-├── conductor.spec.yaml               # Dogfooded self-verification spec contract
-└── pyproject.toml                    # Zero-dependency package & entrypoints
+│   ├── mcp_client_config.json            # Ready-to-use MCP client config
+│   ├── quickstart_guardrail.py           # Programmatic Python guardrail example
+│   └── checkpoint_rollback_demo.py       # Atomic pre-edit checkpoint & rollback demo
+├── scripts/
+│   ├── benchmark_drift_matrix.py         # 5–100 module AST lock & verification matrix runner
+│   └── gate_sdd_strict.py                # Strict SDD readiness & 100% recall release gate
+├── tests/
+│   ├── test_ast_analyzer.py              # AST symbol, complexity & assertion tests
+│   ├── test_checkpoint_rollback.py       # Atomic snapshot & rollback tests
+│   ├── test_cli_and_bench.py             # CLI & 6-scenario drift benchmark tests
+│   ├── test_drift_engine.py              # SDD-001..009 rule evaluation tests
+│   ├── test_mcp_server.py                # JSON-RPC 2.0 MCP server tests
+│   ├── test_serve_and_tools.py           # Telemetry, health monitor, doctor & bench matrix tests
+│   └── test_spec.py                      # Spec parser & schema validation tests
+├── conductor.spec.yaml                   # Dogfooded self-verification spec contract
+└── pyproject.toml                        # Zero-dependency package & entrypoints
 ```
 
 ---

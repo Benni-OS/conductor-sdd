@@ -7,6 +7,8 @@ scope:
   allowed_paths:
     - "conductor_sdd"
     - "tests"
+    - "examples"
+    - "scripts"
   ignored_paths:
     - ".git"
     - ".conductor"
