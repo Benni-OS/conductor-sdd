@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:0D0D0D,50:1a1a2e,100:7000FF&height=200&section=header&text=conductor-sdd&fontSize=56&fontColor=ffffff&fontAlignY=38&desc=Deterministic%20Spec-Driven%20Development%20%26%20AST%20Anti-Drift%20Harness&descAlignY=58&descSize=16&animation=fadeIn" width="100%"/>
+<img src="assets/banner_header.png" width="100%"/>
 
 <br/>
 
@@ -308,7 +308,7 @@ Need autonomous multi-agent swarm orchestration, Spec-Driven Governance at enter
 
 <div align="center">
 
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:7000FF,50:1a1a2e,100:0D0D0D&height=120&section=footer" width="100%"/>
+<img src="assets/banner_footer.png" width="100%"/>
 
 **conductor-sdd** — *Deterministic Spec-Driven Development & AST Anti-Drift Harness* • [benni-os.net](https://benni-os.net) • `MIT License`
 
